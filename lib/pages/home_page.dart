@@ -48,7 +48,8 @@ class _HomePageState extends State<HomePage> {
           children: [
             Container(
               width: MediaQuery.of(context).size.width,
-              height: screenHeight * 0.34,
+              height: (screenHeight * 0.34) -
+                  1, //-1 for divider if not -1 then screen overflow
               color: Colors.black,
               child: Padding(
                 padding:
@@ -68,6 +69,10 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
             ),
+            const Divider(
+                height: 1,
+                thickness: 1.5,
+                color: Color.fromARGB(255, 44, 44, 44)),
             Container(
               padding: const EdgeInsets.all(8),
               color: Colors.black,
