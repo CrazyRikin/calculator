@@ -4,6 +4,7 @@ var kColorTheme = ThemeData(
   useMaterial3: true,
   textButtonTheme: const TextButtonThemeData(
       style: ButtonStyle(
+        textStyle: MaterialStatePropertyAll(TextStyle(fontSize: 24)),
           shape: MaterialStatePropertyAll(CircleBorder(eccentricity: 0)),
           padding: MaterialStatePropertyAll(EdgeInsets.all(8)),
           foregroundColor:
