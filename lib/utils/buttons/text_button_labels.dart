@@ -1,7 +1,7 @@
 List<String> buttonLabels = [
   'C',
-  'H',
-  '( )',
+  '(',
+  ')',
   '/',
   '7',
   '8',

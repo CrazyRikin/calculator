@@ -24,7 +24,10 @@ class _HomePageState extends State<HomePage> {
     } else if (label == 'e') {
       return;
     } else if (label == 'X') {
-      displayText = displayText + ('*');
+      setState(() {
+        displayText = displayText + ('*');
+      });
+
       return;
     } else if (label == '=') {
       setState(() {
@@ -48,7 +51,7 @@ class _HomePageState extends State<HomePage> {
           children: [
             Container(
               width: MediaQuery.of(context).size.width,
-              height: (screenHeight * 0.34) -
+              height: (screenHeight * 0.25) -
                   1, //-1 for divider if not -1 then screen overflow
               color: Colors.black,
               child: Padding(
@@ -76,15 +79,36 @@ class _HomePageState extends State<HomePage> {
             Container(
               padding: const EdgeInsets.all(8),
               color: Colors.black,
-              height: screenHeight * 0.66,
-              child: GridView.builder(
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 4),
-                itemBuilder: (context, index) => CustomTextButton(
-                    label: buttonLabels[index],
-                    onpressed: () {
-                      onPressing(buttonLabels[index]);
-                    }),
+              height: screenHeight * 0.75,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(right: 8.0, top: 24),
+                    child: IconButton(
+                        onPressed: () {
+                          setState(() {
+                            displayText = displayText.substring(
+                                0, displayText.length - 1);
+                          });
+                        },
+                        icon: const Icon(Icons.backspace)),
+                  ),
+                  Expanded(
+                    child: GridView.builder(
+                      physics: const NeverScrollableScrollPhysics(),
+                      itemCount: buttonLabels.length,
+                      gridDelegate:
+                          const SliverGridDelegateWithFixedCrossAxisCount(
+                              crossAxisCount: 4),
+                      itemBuilder: (context, index) => CustomTextButton(
+                          label: buttonLabels[index],
+                          onpressed: () {
+                            onPressing(buttonLabels[index]);
+                          }),
+                    ),
+                  ),
+                ],
               ),
             )
           ]),
