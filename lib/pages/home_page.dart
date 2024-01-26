@@ -1,3 +1,4 @@
+import 'package:calculator/pages/history_page.dart';
 import 'package:calculator/utils/buttons/text_button.dart';
 import 'package:calculator/utils/buttons/text_button_labels.dart';
 import 'package:flutter/material.dart';
@@ -83,16 +84,37 @@ class _HomePageState extends State<HomePage> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
-                  Padding(
-                    padding: const EdgeInsets.only(right: 8.0, top: 24),
-                    child: IconButton(
-                        onPressed: () {
-                          setState(() {
-                            displayText = displayText.substring(
-                                0, displayText.length - 1);
-                          });
-                        },
-                        icon: const Icon(Icons.backspace)),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(right: 8.0, top: 24),
+                        child: IconButton(
+                            onPressed: () {
+                              showBottomSheet(
+                                backgroundColor:
+                                    const Color.fromARGB(255, 3, 3, 3),
+                                shape: const RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.only(topRight:Radius.circular(20) ,
+                                        topLeft: Radius.circular(20))),
+                                context: context,
+                                builder: (context) => const History(),
+                              );
+                            },
+                            icon: const Icon(Icons.history)),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(right: 8.0, top: 24),
+                        child: IconButton(
+                            onPressed: () {
+                              setState(() {
+                                displayText = displayText.substring(
+                                    0, displayText.length - 1);
+                              });
+                            },
+                            icon: const Icon(Icons.backspace)),
+                      ),
+                    ],
                   ),
                   Expanded(
                     child: GridView.builder(
