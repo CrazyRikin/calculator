@@ -93,7 +93,7 @@ class _HistoryState extends State<History> {
     return Padding(
       padding: const EdgeInsets.all(24),
       child: Container(
-          color: const Color.fromARGB(255, 10, 10, 10),
+          color: const Color.fromARGB(255, 0, 0, 0),
           height: MediaQuery.of(context).size.height * 0.7,
           width: MediaQuery.of(context).size.width * 0.9,
           child: content),

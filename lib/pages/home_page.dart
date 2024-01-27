@@ -57,7 +57,7 @@ class _HomePageState extends State<HomePage> {
           children: [
             Container(
               width: MediaQuery.of(context).size.width,
-              height: (screenHeight * 0.25) -
+              height: (screenHeight * 0.3) -
                   1, //-1 for divider if not -1 then screen overflow
               color: Colors.black,
               child: Padding(
@@ -83,9 +83,9 @@ class _HomePageState extends State<HomePage> {
                 thickness: 1.5,
                 color: Color.fromARGB(255, 44, 44, 44)),
             Container(
-              padding: const EdgeInsets.all(8),
+              padding: const EdgeInsets.symmetric(horizontal: 8),
               color: Colors.black,
-              height: screenHeight * 0.75,
+              height: screenHeight * 0.7,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
@@ -93,7 +93,7 @@ class _HomePageState extends State<HomePage> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Padding(
-                        padding: const EdgeInsets.only(right: 8.0, top: 24),
+                        padding: const EdgeInsets.only(left: 8.0, top: 24),
                         child: IconButton(
                             onPressed: () {
                               showBottomSheet(
@@ -107,7 +107,10 @@ class _HomePageState extends State<HomePage> {
                                 builder: (context) => const History(),
                               );
                             },
-                            icon: const Icon(Icons.history)),
+                            icon: const Icon(
+                              Icons.history,
+                              size: 30,
+                            )),
                       ),
                       Padding(
                         padding: const EdgeInsets.only(right: 8.0, top: 24),
@@ -118,7 +121,10 @@ class _HomePageState extends State<HomePage> {
                                     0, displayText.length - 1);
                               });
                             },
-                            icon: const Icon(Icons.backspace)),
+                            icon: const Icon(
+                              Icons.backspace,
+                              size: 30,
+                            )),
                       ),
                     ],
                   ),
