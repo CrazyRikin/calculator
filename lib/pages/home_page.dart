@@ -32,7 +32,10 @@ class _HomePageState extends State<HomePage> {
 
       return;
     } else if (label == '=') {
-      historyList.add(displayText);
+      if (displayText.isNotEmpty) {
+        historyList.add(displayText);
+      }
+
       setState(() {
         displayText = displayText.interpret().toString();
       });
