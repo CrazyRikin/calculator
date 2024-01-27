@@ -15,6 +15,38 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   var displayText = '';
 
+  void addToHistory() {
+    var condition =
+        historyList.isEmpty || historyList.last.toString() != displayText;
+    if (condition && !displayText.contains('ERROR!')) {
+      historyList.add(displayText);
+    }
+  }
+
+  void interpretAnswer() {
+    try {
+      if (displayText.contains('/')) {
+        var answer = displayText.interpret().toDouble().toStringAsFixed(11);
+        if (answer.contains('.000')) {
+          displayText =
+              displayText.interpret().truncateToDouble().toStringAsFixed(0);
+          return;
+        } else {
+          displayText = answer;
+
+          return;
+        }
+      } else if (displayText.contains('.')) {
+        displayText = displayText.interpret().toDouble().toStringAsFixed(3);
+        return;
+      }
+      displayText =
+          displayText.interpret().truncateToDouble().toStringAsFixed(0);
+    } catch (e) {
+      displayText = 'ERROR!';
+    }
+  }
+
   void onPressing(String label) {
     if (label == 'C') {
       setState(() {
@@ -31,19 +63,36 @@ class _HomePageState extends State<HomePage> {
       });
 
       return;
+    } else if (label == '(') {
+      if (displayText.endsWith(')')) {
+        setState(() {
+          displayText = displayText + ('*(');
+        });
+        return;
+      }
+      setState(() {
+        displayText = displayText + ('(');
+      });
+      return;
     } else if (label == '=') {
       if (displayText.isNotEmpty) {
-        historyList.add(displayText);
-      }
+        addToHistory();
 
-      setState(() {
-        displayText = displayText.interpret().toString();
-      });
+        setState(() {
+          interpretAnswer();
+        });
+      }
     } else {
       setState(() {
         displayText = displayText + label;
       });
     }
+  }
+
+  void onTapHistoryItem(index) {
+    setState(() {
+      displayText = historyList[index];
+    });
   }
 
   @override
@@ -104,7 +153,8 @@ class _HomePageState extends State<HomePage> {
                                         topRight: Radius.circular(20),
                                         topLeft: Radius.circular(20))),
                                 context: context,
-                                builder: (context) => const History(),
+                                builder: (context) =>
+                                    History(onTap: onTapHistoryItem),
                               );
                             },
                             icon: const Icon(
