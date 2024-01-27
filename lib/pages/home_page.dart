@@ -1,6 +1,7 @@
 import 'package:calculator/pages/history_page.dart';
 import 'package:calculator/utils/buttons/text_button.dart';
 import 'package:calculator/utils/buttons/text_button_labels.dart';
+import 'package:calculator/utils/history_list.dart';
 import 'package:flutter/material.dart';
 import 'package:function_tree/function_tree.dart';
 
@@ -31,6 +32,7 @@ class _HomePageState extends State<HomePage> {
 
       return;
     } else if (label == '=') {
+      historyList.add(displayText);
       setState(() {
         displayText = displayText.interpret().toString();
       });
@@ -95,7 +97,8 @@ class _HomePageState extends State<HomePage> {
                                 backgroundColor:
                                     const Color.fromARGB(255, 3, 3, 3),
                                 shape: const RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.only(topRight:Radius.circular(20) ,
+                                    borderRadius: BorderRadius.only(
+                                        topRight: Radius.circular(20),
                                         topLeft: Radius.circular(20))),
                                 context: context,
                                 builder: (context) => const History(),

@@ -15,7 +15,7 @@ List<String> buttonLabels = [
   '2',
   '3',
   '+',
-  'e',
+  '^',
   '0',
   '.',
   '='
